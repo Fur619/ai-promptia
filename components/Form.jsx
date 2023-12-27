@@ -43,7 +43,7 @@ const Form = ({
             placeholder='#tag'
             required
             className='form_input'
-            maxLength={200}
+            maxLength={50}
           />
         </label>
 
