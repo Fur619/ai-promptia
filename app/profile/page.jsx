@@ -40,7 +40,7 @@ const ProfilePage = () => {
 
     useEffect(() => {
         fetchPosts()
-    }, [])
+    }, [session])
 
     if (!session) {
         if (status === "loading") return <></>
