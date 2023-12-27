@@ -1,5 +1,6 @@
 "use client"
 
+import Navigate from '@components/Navigate'
 import Profile from '@components/Profile'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -8,7 +9,7 @@ import { useState, useEffect } from 'react'
 
 const ProfilePage = () => {
 
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
     const router = useRouter();
 
     const [posts, setPosts] = useState([]);
@@ -40,6 +41,12 @@ const ProfilePage = () => {
     useEffect(() => {
         fetchPosts()
     }, [])
+
+    if (!session) {
+        if (status === "loading") return <></>
+        return <Navigate to="/" router={router} />
+    }
+
 
     return (
         <Profile

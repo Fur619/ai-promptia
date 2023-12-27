@@ -4,9 +4,10 @@ import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import Form from "@components/Form"
+import Navigate from "@components/Navigate"
 
 const CreatePrompt = () => {
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
     const router = useRouter();
     const [submitting, setSubmitting] = useState(false);
     const [post, setPost] = useState({
@@ -39,7 +40,11 @@ const CreatePrompt = () => {
         finally {
             setSubmitting(false)
         }
+    }
 
+    if (!session) {
+        if (status === "loading") return <></>
+        return <Navigate to="/" router={router} />
     }
 
     return (
