@@ -40,7 +40,8 @@ const ProfilePage = () => {
             if (!session?.user.id) return
             const response = await fetch(`/api/users/${session?.user.id}/posts?page=${page}`);
             const data = await response.json()
-            setPosts(prev => [...prev, ...data?.prompts?.filter(prompt => !prev.find(post => post?._id === prompt?._id))]);
+            if (page === 1) { setPosts(data?.prompts || []) }
+            else { setPosts(prev => [...prev, ...data?.prompts?.filter(prompt => !prev.find(post => post?._id === prompt?._id))]); }
             setPostsCount(data?.count);
         } catch (error) {
             console.log({ error });
