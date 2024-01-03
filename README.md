@@ -2,8 +2,11 @@
 
 ## Technologies used
 Next js 14
+
 Mongo DB
+
 Next Auth
+
 Tailwind Css
 
 ## Live URL
