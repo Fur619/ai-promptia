@@ -69,7 +69,7 @@ const Feed = () => {
 
       <PromptCardList
         data={posts}
-        handleTagClick={(val) => onSearchChange(val, 0)}
+        handleTagClick={(val) => val?.[0] === "#" ? onSearchChange(val?.slice(1), 0) : onSearchChange(val, 0)}
       />
 
       {postCount > posts.length &&
