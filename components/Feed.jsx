@@ -39,7 +39,8 @@ const Feed = () => {
       setLoading(true);
       const response = await fetch(`/api/prompt?query=${query}&page=${page}`);
       const data = await response.json()
-      setPosts(prev => [...prev, ...data?.prompts?.filter(prompt => !prev.find(post => post?._id === prompt?._id))]);
+      if (page === 1) { setPosts(data?.prompts || []) }
+      else { setPosts(prev => [...prev, ...data?.prompts?.filter(prompt => !prev.find(post => post?._id === prompt?._id))]) }
       setPostsCount(data?.count)
 
     } catch (error) {
